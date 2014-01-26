@@ -768,6 +768,12 @@ func (S *Set) String() string {
 	return sb.String()
 }
 
+func (S *Set) Slice() []int {
+    ret := make([]int, 0, len(S.data) * 8) // guess a length
+    S.Do(func(i int) {ret = append(ret, i)})
+    return ret
+}
+
 // writeRange writes either "", "a", "a, b, " or "a..b, " to buffer.
 func writeRange(sb *bytes.Buffer, a, b int) {
 	switch {
